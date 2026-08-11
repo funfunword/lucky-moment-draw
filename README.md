@@ -1,4 +1,4 @@
-![a06351ba046ef97fc8020a4f6e015ac2](https://github.com/user-attachments/assets/e4a10d2b-733c-449e-97b1-c7cc44da6643)# vinext-starter
+# vinext-starter
 
 A clean full-stack starter running on
 [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
