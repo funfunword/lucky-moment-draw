@@ -4,6 +4,9 @@ A clean full-stack starter running on
 [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
 Drizzle support.
 
+![Uploading a06351ba046ef97fc8020a4f6e015ac2.png…]()
+
+
 ## Prerequisites
 
 - Node.js `>=22.13.0`
