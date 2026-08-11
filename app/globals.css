@@ -1,42 +1,616 @@
 @import "tailwindcss";
 
-:root { --wine: #400b18; --deep: #1b0710; --gold: #e8bd69; --cream: #fff7e8; }
+:root {
+  --red: #d91f27;
+  --red-deep: #a90d16;
+  --coral: #f44b35;
+  --gold: #ffd044;
+  --gold-deep: #df8e09;
+  --cream: #fff5cf;
+  --paper: #fffaf0;
+  --ink: #7d1719;
+  --green: #168862;
+}
+
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; background: #18070d; color: var(--cream); font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif; }
+body {
+  margin: 0;
+  background: #f8dfa3;
+  color: var(--ink);
+  font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
 button, a { font: inherit; }
 button { -webkit-tap-highlight-color: transparent; }
 
-.app-shell { min-height: 100vh; position: relative; overflow: hidden; background: radial-gradient(circle at 50% 12%, #731d32 0, #400b18 31%, #230911 69%, #17060c 100%); }
-.app-shell::before { content: ""; position: absolute; inset: 0; opacity: .18; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 56px 56px; mask-image: linear-gradient(to bottom, black, transparent 78%); }
-.ambient { position: absolute; width: 540px; height: 540px; border: 1px solid rgba(232,189,105,.08); border-radius: 50%; pointer-events: none; }
-.ambient::after, .ambient::before { content: ""; position: absolute; inset: 70px; border: 1px solid rgba(232,189,105,.06); border-radius: 50%; }
-.ambient::after { inset: 150px; }
-.ambient-one { top: 100px; left: -330px; }.ambient-two { top: 220px; right: -370px; }
+.app-shell {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #ef3033 0, #e71f28 748px, #f8dfa3 748px, #fff1c9 100%);
+}
+.sunburst {
+  position: absolute;
+  top: -350px;
+  left: 50%;
+  width: 1320px;
+  height: 1320px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  opacity: .2;
+  background: repeating-conic-gradient(from -8deg, rgba(255, 218, 90, .9) 0 7deg, transparent 7deg 15deg);
+  pointer-events: none;
+}
+.festive-pattern {
+  position: absolute;
+  inset: 82px 0 auto;
+  height: 670px;
+  opacity: .08;
+  pointer-events: none;
+  background-image:
+    linear-gradient(45deg, transparent 42%, #fff 42% 48%, transparent 48%),
+    linear-gradient(-45deg, transparent 42%, #fff 42% 48%, transparent 48%);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, #000, transparent 86%);
+}
 
-.topbar { height: 82px; padding: 0 5vw; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(232,189,105,.18); background: rgba(23,6,12,.4); backdrop-filter: blur(18px); position: relative; z-index: 10; }
-.brand { color: var(--cream); text-decoration: none; display: flex; align-items: center; gap: 12px; }.brand-mark { width: 40px; height: 40px; border: 1px solid var(--gold); transform: rotate(45deg); display: grid; place-items: center; color: var(--gold); font-family: Georgia, serif; }.brand-mark::first-letter { transform: rotate(-45deg); }.brand strong { display: block; font-size: 17px; letter-spacing: .18em; }.brand small { display: block; color: rgba(255,247,232,.48); font-size: 8px; letter-spacing: .25em; margin-top: 3px; }
-.event-title { display: flex; gap: 12px; align-items: center; color: rgba(255,247,232,.72); font-size: 13px; letter-spacing: .15em; }.event-title p { margin: 0; }.event-title span:last-child { color: var(--gold); font-family: Georgia, serif; }.spark { color: var(--gold); }
-.reset-button { color: rgba(255,247,232,.68); border: 1px solid rgba(232,189,105,.22); border-radius: 999px; background: rgba(255,255,255,.025); padding: 10px 17px; cursor: pointer; transition: .25s; font-size: 13px; }.reset-button:hover:not(:disabled) { border-color: var(--gold); color: var(--gold); }.reset-button:disabled { opacity: .35; cursor: not-allowed; }
+.topbar {
+  height: 82px;
+  padding: 0 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 20;
+  color: var(--red-deep);
+  background: rgba(255, 249, 227, .96);
+  border-bottom: 4px solid var(--gold);
+  box-shadow: 0 8px 28px rgba(126, 8, 14, .18);
+}
+.brand {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-mark {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: #fff8dd;
+  font: 700 22px "Songti SC", STSong, serif;
+  background: linear-gradient(145deg, #ef3940, #b70e17);
+  border: 3px solid var(--gold);
+  border-radius: 13px;
+  box-shadow: 0 4px 0 #9d0b12, 0 7px 16px rgba(153, 10, 16, .18);
+  transform: rotate(-3deg);
+}
+.brand-copy strong { display: block; font-size: 17px; letter-spacing: .12em; }
+.brand-copy small { display: block; margin-top: 3px; color: #bc6b38; font-size: 8px; letter-spacing: .25em; }
+.event-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 18px;
+  color: var(--red);
+  border: 1px solid #f0bf54;
+  border-radius: 999px;
+  background: #fff2ba;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .09em;
+}
+.event-title p { margin: 0; }
+.event-title span { color: #e39810; }
+.reset-button {
+  padding: 10px 17px;
+  color: var(--red);
+  border: 1px solid #efb86a;
+  border-radius: 999px;
+  background: #fff9e7;
+  cursor: pointer;
+  transition: transform .2s, color .2s, background .2s;
+  font-size: 13px;
+  font-weight: 700;
+}
+.reset-button:hover:not(:disabled) { color: #fff; background: var(--red); transform: translateY(-2px); }
+.reset-button:disabled { opacity: .38; cursor: not-allowed; }
 
-.hero { min-height: 665px; display: flex; align-items: center; flex-direction: column; padding: 62px 20px 55px; position: relative; z-index: 2; text-align: center; }
-.eyebrow { display: flex; align-items: center; gap: 14px; font-size: 10px; letter-spacing: .38em; color: var(--gold); }.eyebrow span { width: 35px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }.eyebrow span:last-child { transform: rotate(180deg); }
-.hero h1 { font-family: Georgia, "Songti SC", serif; font-size: clamp(38px, 4vw, 58px); font-weight: 400; letter-spacing: .12em; margin: 18px 0 10px; text-shadow: 0 4px 35px rgba(232,189,105,.15); }.hero-copy { color: rgba(255,247,232,.6); font-size: 13px; letter-spacing: .08em; margin: 0; }
-.number-stage { height: 310px; width: 420px; max-width: 90vw; position: relative; display: grid; place-items: center; margin: 12px 0 0; }
-.number-halo { width: 242px; height: 242px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; background: radial-gradient(circle, rgba(232,189,105,.14), rgba(106,24,44,.05) 58%, transparent 70%); filter: drop-shadow(0 0 38px rgba(232,189,105,.11)); }
-.number-halo::before { content: ""; position: absolute; inset: 4px; border: 1px solid rgba(232,189,105,.38); border-radius: 50%; box-shadow: inset 0 0 40px rgba(232,189,105,.05), 0 0 0 12px rgba(232,189,105,.018); }
-.number-halo .label { color: rgba(232,189,105,.62); letter-spacing: .3em; font-size: 9px; }.number-halo strong { color: var(--gold); line-height: .98; font-family: Georgia, serif; font-size: 108px; font-weight: 400; font-variant-numeric: tabular-nums; text-shadow: 0 0 32px rgba(232,189,105,.24); }.number-halo .blessing { color: rgba(255,247,232,.46); letter-spacing: .25em; font-size: 10px; }
-.orbit { position: absolute; width: 286px; height: 286px; border-radius: 50%; border: 1px dashed rgba(232,189,105,.16); animation: rotate 24s linear infinite; }.orbit::before, .orbit::after { content: "✦"; color: var(--gold); font-size: 9px; position: absolute; top: 28px; left: 36px; }.orbit::after { top: auto; left: auto; bottom: 25px; right: 42px; }.orbit-two { width: 322px; height: 322px; border-style: solid; opacity: .32; animation-direction: reverse; animation-duration: 38s; }
-.is-revealing .number-halo { animation: pulse .55s ease-in-out infinite alternate; }.is-revealing .orbit { animation-duration: 2s; }.celebration { color: var(--gold); position: absolute; bottom: 24px; letter-spacing: .5em; animation: rise .65s ease-out both; }
-.draw-button { width: 250px; height: 62px; border: 1px solid #f5d992; color: #32101a; border-radius: 4px; background: linear-gradient(135deg, #f3d78e, #d6a84f); box-shadow: 0 12px 40px rgba(225,177,84,.18), inset 0 1px rgba(255,255,255,.55); cursor: pointer; position: relative; overflow: hidden; font-weight: 700; letter-spacing: .12em; transition: transform .2s, box-shadow .2s; }.draw-button:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 17px 45px rgba(225,177,84,.3); }.draw-button:active:not(:disabled) { transform: translateY(0); }.draw-button:disabled { cursor: not-allowed; opacity: .7; }.draw-button small { font-weight: 400; font-size: 10px; margin-left: 12px; opacity: .7; letter-spacing: 0; }.gift-icon { margin-right: 10px; }.button-shine { position: absolute; width: 60px; height: 160%; top: -30%; left: -90px; background: rgba(255,255,255,.28); transform: rotate(22deg); transition: left .7s; }.draw-button:hover .button-shine { left: 290px; }
+.hero {
+  min-height: 690px;
+  padding: 48px 20px 44px;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+.hero-kicker {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: #fff0b0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .32em;
+}
+.hero-kicker span {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  color: var(--red);
+  background: var(--gold);
+  border: 2px solid #fff0a7;
+  border-radius: 8px;
+  box-shadow: 0 4px 0 #c97505;
+  font: 700 13px "Songti SC", serif;
+  letter-spacing: 0;
+  transform: rotate(-5deg);
+}
+.hero-kicker span:last-child { transform: rotate(5deg); }
+.hero h1 {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin: 14px 0 7px;
+  line-height: 1;
+  letter-spacing: .06em;
+  font-family: "Songti SC", STSong, serif;
+  text-shadow: 0 5px 0 rgba(132, 6, 12, .25), 0 14px 30px rgba(132, 6, 12, .22);
+}
+.hero h1 span { color: #fff9e4; font-size: clamp(43px, 4.4vw, 68px); }
+.hero h1 b { color: var(--gold); font-size: clamp(35px, 3.5vw, 54px); }
+.hero-copy {
+  margin: 5px 0 0;
+  color: #ffe8b1;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .07em;
+}
 
-.rounds-panel, .winners-panel { max-width: 1180px; margin: 0 auto 54px; border: 1px solid rgba(232,189,105,.16); background: linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.012)); backdrop-filter: blur(12px); padding: 32px; position: relative; z-index: 2; }.section-heading { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 26px; }.section-heading span { color: var(--gold); font-size: 9px; letter-spacing: .3em; }.section-heading h2 { font: 400 25px Georgia, "Songti SC", serif; letter-spacing: .1em; margin: 6px 0 0; }.section-heading p { font-size: 12px; color: rgba(255,247,232,.42); margin: 0; }.section-heading p strong { color: var(--gold); font-size: 18px; }
-.round-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }.round-card { min-height: 144px; text-align: left; padding: 17px; border: 1px solid rgba(232,189,105,.12); background: rgba(14,3,7,.22); color: var(--cream); position: relative; transition: .22s; }.round-card:disabled { cursor: default; }.round-card.active { cursor: pointer; border-color: rgba(232,189,105,.7); background: linear-gradient(145deg, rgba(232,189,105,.11), rgba(255,255,255,.015)); box-shadow: inset 0 0 25px rgba(232,189,105,.04); }.round-card.active:hover { transform: translateY(-2px); border-color: var(--gold); }.round-card.done { background: rgba(255,255,255,.018); }.round-index { position: absolute; top: 13px; right: 14px; color: rgba(232,189,105,.16)!important; font: 28px Georgia, serif; letter-spacing: 0!important; }.round-name { display: block; color: rgba(255,247,232,.55)!important; letter-spacing: .08em!important; }.round-count { display: block; margin-top: 17px; color: var(--gold); font: 30px Georgia, serif; }.round-count small { color: rgba(255,247,232,.36); font: 10px Arial; }.progress-track { display: block; height: 2px; background: rgba(255,255,255,.08); margin: 10px 0; }.progress-track i { height: 100%; background: var(--gold); display: block; transition: width .45s; }.round-status { color: rgba(255,247,232,.3)!important; font-size: 9px!important; letter-spacing: .13em!important; }.round-card.active .round-status { color: var(--gold)!important; }.round-card.done .round-status { color: rgba(180,219,171,.58)!important; }
-.empty-state { min-height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px dashed rgba(232,189,105,.14); color: rgba(255,247,232,.42); }.empty-state span { color: var(--gold); }.empty-state p { margin: 12px 0 5px; letter-spacing: .12em; }.empty-state small { opacity: .55; }
-.winner-groups { display: grid; gap: 10px; }.winner-row { display: flex; min-height: 78px; border-bottom: 1px solid rgba(232,189,105,.08); align-items: center; padding: 8px 0; }.winner-row:last-child { border: 0; }.winner-round { width: 82px; flex: 0 0 auto; border-right: 1px solid rgba(232,189,105,.13); }.winner-round span { display: block; font-size: 7px; color: rgba(232,189,105,.44); letter-spacing: .22em; }.winner-round strong { display: block; font: 28px Georgia, serif; color: var(--gold); }.winner-numbers { padding-left: 25px; display: flex; flex-wrap: wrap; gap: 10px; }.winner-numbers span { width: 45px; height: 45px; display: grid; place-items: center; border: 1px solid rgba(232,189,105,.25); border-radius: 50%; color: rgba(255,247,232,.8); font: 18px Georgia, serif; animation: reveal .45s ease-out both; }.winner-numbers .latest { color: #36101a; background: var(--gold); border-color: #f5d58d; box-shadow: 0 0 25px rgba(232,189,105,.22); }
-footer { height: 100px; border-top: 1px solid rgba(232,189,105,.1); display: flex; justify-content: center; align-items: center; gap: 18px; color: rgba(255,247,232,.3); position: relative; z-index: 2; font: 12px Georgia, "Songti SC", serif; letter-spacing: .18em; }footer span { color: rgba(232,189,105,.45); }
+.lantern {
+  width: 78px;
+  position: absolute;
+  top: 26px;
+  z-index: 2;
+  color: var(--red-deep);
+  animation: lantern-sway 3.4s ease-in-out infinite alternate;
+  transform-origin: 50% -28px;
+}
+.lantern::before {
+  content: "";
+  width: 2px;
+  height: 58px;
+  position: absolute;
+  top: -58px;
+  left: 38px;
+  background: #ffd56b;
+}
+.lantern span {
+  width: 78px;
+  height: 88px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 1;
+  border: 4px solid #ffdb63;
+  border-radius: 44% 44% 38% 38%;
+  background: linear-gradient(90deg, #f5a912 0, #ffd95f 47%, #f5a912 100%);
+  box-shadow: inset 10px 0 rgba(255, 255, 255, .2), 0 9px 20px rgba(114, 5, 10, .22);
+  font: 800 30px "Songti SC", serif;
+}
+.lantern i:first-child {
+  width: 52px;
+  height: 9px;
+  display: block;
+  margin: 0 auto -3px;
+  position: relative;
+  z-index: 2;
+  border-radius: 4px;
+  background: #a70c13;
+  border: 2px solid #ffd056;
+}
+.lantern i:last-child {
+  width: 12px;
+  height: 34px;
+  display: block;
+  margin: -1px auto 0;
+  background: repeating-linear-gradient(90deg, #ffd45f 0 2px, transparent 2px 4px);
+  border-top: 8px solid #a70c13;
+}
+.lantern-left { left: max(3vw, 24px); }
+.lantern-right { right: max(3vw, 24px); animation-delay: -.9s; }
 
-@keyframes rotate { to { transform: rotate(360deg); } } @keyframes pulse { to { transform: scale(1.035); filter: drop-shadow(0 0 48px rgba(232,189,105,.22)); } } @keyframes rise { from { opacity: 0; transform: translateY(16px); } } @keyframes reveal { from { opacity: 0; transform: scale(.5) rotate(-20deg); } }
-@media (max-width: 900px) { .round-grid { grid-template-columns: repeat(2, 1fr); }.rounds-panel,.winners-panel { margin-left: 18px; margin-right: 18px; }.event-title { display: none; } }
-@media (max-width: 540px) { .topbar { padding: 0 18px; }.brand strong { font-size: 14px; }.reset-button { padding: 9px 11px; font-size: 11px; }.hero { padding-top: 45px; }.number-stage { height: 290px; }.rounds-panel,.winners-panel { padding: 22px 16px; }.section-heading { align-items: flex-start; gap: 10px; }.section-heading p { text-align: right; }.winner-round { width: 60px; }.winner-numbers { padding-left: 15px; gap: 7px; }.winner-numbers span { width: 39px; height: 39px; }.round-grid { grid-template-columns: 1fr 1fr; } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms!important; animation-iteration-count: 1!important; scroll-behavior: auto!important; } }
+.number-stage {
+  width: 490px;
+  height: 325px;
+  max-width: 92vw;
+  margin: 24px 0 17px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  border: 7px solid var(--gold);
+  border-radius: 36px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.7), transparent 38%),
+    linear-gradient(145deg, #fff9df, #ffd76d);
+  box-shadow:
+    0 12px 0 #a80d16,
+    0 25px 48px rgba(113, 5, 10, .3),
+    inset 0 0 0 3px #e99b13;
+}
+.number-stage::before,
+.number-stage::after {
+  content: "";
+  width: 46px;
+  height: 46px;
+  position: absolute;
+  top: 24px;
+  border: 5px solid rgba(220, 33, 39, .13);
+  border-radius: 50%;
+}
+.number-stage::before { left: 26px; }
+.number-stage::after { right: 26px; }
+.stage-bulbs {
+  position: absolute;
+  inset: 8px;
+  pointer-events: none;
+  border: 3px dotted #e72a2e;
+  border-radius: 24px;
+  animation: bulbs 1.2s steps(2, end) infinite;
+}
+.stage-badge {
+  min-width: 92px;
+  padding: 9px 20px 8px;
+  position: absolute;
+  top: -20px;
+  z-index: 4;
+  color: #fff8dd;
+  background: linear-gradient(180deg, #f13b3d, #c8131b);
+  border: 3px solid var(--gold);
+  border-radius: 999px;
+  box-shadow: 0 5px 0 #9f0b12;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: .13em;
+}
+.number-medallion {
+  width: 226px;
+  height: 226px;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 7px solid #f5aa13;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 36% 28%, #fff 0 5%, transparent 6%),
+    radial-gradient(circle, #fffdf3 0 48%, #ffefaf 49% 67%, #ffd245 68% 100%);
+  box-shadow: 0 10px 0 #d78a0a, 0 18px 30px rgba(147, 68, 0, .25), inset 0 0 0 4px #fff6c8;
+}
+.number-medallion::before {
+  content: "好运";
+  width: 44px;
+  height: 44px;
+  position: absolute;
+  right: -25px;
+  top: 18px;
+  display: grid;
+  place-items: center;
+  color: #fff8dc;
+  background: var(--red);
+  border: 3px solid #fff0a4;
+  border-radius: 50%;
+  box-shadow: 0 4px 0 #a90d16;
+  font: 700 11px "Songti SC", serif;
+  transform: rotate(9deg);
+}
+.number-label { color: #bb6c18; letter-spacing: .24em; font-size: 8px; font-weight: 800; }
+.number-medallion strong {
+  color: var(--red);
+  line-height: .98;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 102px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.05em;
+  text-shadow: 0 4px 0 #f8b51f, 0 8px 18px rgba(183, 13, 21, .14);
+}
+.blessing { color: var(--red-deep); letter-spacing: .2em; font-size: 11px; font-weight: 800; }
+.cloud { position: absolute; color: rgba(227, 37, 43, .16); font-size: 92px; line-height: 1; }
+.cloud-one { left: 28px; bottom: 10px; transform: rotate(-8deg); }
+.cloud-two { right: 26px; top: 41px; transform: rotate(12deg) scale(.78); }
+.celebration {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  animation: celebration-pop .65s ease-out both;
+}
+.celebration span { position: absolute; color: var(--red); font-weight: 800; }
+.celebration span:nth-child(1) { left: 80px; top: 58px; color: #ee9c00; font-size: 24px; }
+.celebration span:nth-child(2) { left: 66px; bottom: 50px; transform: rotate(-18deg); }
+.celebration span:nth-child(3) { right: 77px; top: 65px; color: #ee9c00; font-size: 28px; }
+.celebration span:nth-child(4) { right: 69px; bottom: 47px; transform: rotate(15deg); }
+.celebration span:nth-child(5) { left: 50%; top: 30px; color: var(--red); }
+.is-revealing .number-medallion { animation: lucky-roll .18s ease-in-out infinite alternate; }
+.is-revealing .number-medallion strong { filter: blur(.8px); }
+.is-revealing .stage-bulbs { animation-duration: .25s; }
+
+.draw-button {
+  min-width: 305px;
+  height: 68px;
+  padding: 0 23px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+  color: var(--red-deep);
+  border: 4px solid #fff1a3;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffe871, #ffc52f);
+  box-shadow: 0 8px 0 #b70e17, 0 15px 30px rgba(108, 2, 8, .25), inset 0 2px rgba(255, 255, 255, .7);
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  transition: transform .2s, box-shadow .2s;
+}
+.draw-button:hover:not(:disabled) { transform: translateY(-3px) scale(1.02); box-shadow: 0 11px 0 #b70e17, 0 20px 34px rgba(108, 2, 8, .29); }
+.draw-button:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 4px 0 #b70e17; }
+.draw-button:disabled { cursor: not-allowed; opacity: .78; }
+.draw-button small {
+  min-width: 42px;
+  padding: 4px 8px;
+  color: #fff6d6;
+  background: var(--red);
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+.gift-icon { color: var(--red); }
+.button-glow {
+  width: 55px;
+  height: 140%;
+  position: absolute;
+  top: -20%;
+  left: -90px;
+  background: rgba(255, 255, 255, .4);
+  transform: rotate(18deg);
+  transition: left .65s;
+}
+.draw-button:hover .button-glow { left: 350px; }
+.draw-tip { margin: 18px 0 0; color: #ffdca1; font-size: 11px; letter-spacing: .1em; }
+
+.confetti { width: 230px; height: 500px; position: absolute; top: 112px; z-index: 2; pointer-events: none; }
+.confetti-left { left: 0; }
+.confetti-right { right: 0; transform: scaleX(-1); }
+.confetti i { width: 10px; height: 22px; position: absolute; display: block; background: var(--gold); transform: rotate(24deg); animation: confetti-float 4s ease-in-out infinite alternate; }
+.confetti i:nth-child(1) { left: 28px; top: 120px; background: #fff4bd; }
+.confetti i:nth-child(2) { left: 106px; top: 50px; width: 14px; height: 14px; border-radius: 50%; background: #ffd33f; animation-delay: -.7s; }
+.confetti i:nth-child(3) { left: 165px; top: 180px; background: #ffab4d; transform: rotate(-31deg); animation-delay: -1.3s; }
+.confetti i:nth-child(4) { left: 73px; top: 300px; width: 13px; height: 13px; background: #fff1ad; animation-delay: -2s; }
+.confetti i:nth-child(5) { left: 190px; top: 365px; background: #ffcb36; transform: rotate(52deg); animation-delay: -.4s; }
+.confetti i:nth-child(6) { left: 24px; top: 420px; width: 14px; height: 14px; border-radius: 50%; background: #ff8e43; animation-delay: -1.6s; }
+
+.rounds-panel,
+.winners-panel {
+  max-width: 1180px;
+  margin: 0 auto 54px;
+  padding: 38px 34px 34px;
+  position: relative;
+  z-index: 5;
+  color: var(--ink);
+  border: 3px solid #f5bd35;
+  border-radius: 26px;
+  background: rgba(255, 250, 238, .98);
+  box-shadow: 0 13px 0 rgba(206, 88, 15, .13), 0 22px 45px rgba(152, 62, 0, .12);
+}
+.rounds-panel { margin-top: -1px; }
+.panel-ribbon {
+  position: absolute;
+  top: -18px;
+  left: 32px;
+  color: #fff8dc;
+  background: var(--red);
+  border: 3px solid var(--gold);
+  border-radius: 8px;
+  box-shadow: 0 4px 0 var(--red-deep);
+  transform: rotate(-2deg);
+}
+.panel-ribbon span { display: block; padding: 8px 20px; font-weight: 800; font-size: 12px; letter-spacing: .15em; }
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 26px;
+}
+.section-heading span { color: #d9860a; font-size: 9px; font-weight: 800; letter-spacing: .3em; }
+.section-heading h2 { margin: 6px 0 0; color: var(--red); font: 800 28px "Songti SC", STSong, serif; letter-spacing: .08em; }
+.section-heading p { margin: 0; color: #aa7045; font-size: 12px; }
+.section-heading p strong { color: var(--red); font: 800 20px Georgia, serif; }
+.round-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.round-card {
+  min-height: 144px;
+  padding: 17px;
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  color: var(--ink);
+  border: 2px solid #f1d18b;
+  border-radius: 16px;
+  background: #fff5d8;
+  transition: transform .2s, border-color .2s, box-shadow .2s;
+}
+.round-card::after {
+  content: "福";
+  position: absolute;
+  right: -2px;
+  bottom: -17px;
+  color: rgba(214, 35, 39, .055);
+  font: 800 60px "Songti SC", serif;
+  transform: rotate(-10deg);
+}
+.round-card:disabled { cursor: default; }
+.round-card.active {
+  color: #fff9dd;
+  cursor: pointer;
+  border-color: #ffce43;
+  background: linear-gradient(145deg, #ef393e, #c8141c);
+  box-shadow: 0 7px 0 #950b12, 0 12px 22px rgba(174, 10, 19, .2);
+  transform: translateY(-3px);
+}
+.round-card.active:hover { transform: translateY(-6px); box-shadow: 0 10px 0 #950b12, 0 16px 26px rgba(174, 10, 19, .24); }
+.round-card.done { border-color: #a9dac9; background: #eefaf2; }
+.round-index { position: absolute; top: 12px; right: 13px; color: rgba(187, 92, 28, .19); font: 800 29px Georgia, serif; }
+.round-card.active .round-index { color: rgba(255, 242, 173, .24); }
+.round-name { display: block; color: #a35f35; font-size: 12px; font-weight: 700; letter-spacing: .08em; }
+.round-card.active .round-name { color: #ffe7a2; }
+.round-card.done .round-name { color: var(--green); }
+.round-count { display: block; margin-top: 17px; color: var(--red); font: 800 30px Georgia, serif; }
+.round-card.active .round-count { color: var(--gold); }
+.round-card.done .round-count { color: var(--green); }
+.round-count small { color: #b1744b; font: 600 10px Arial; }
+.round-card.active .round-count small { color: #ffe7b4; }
+.progress-track { display: block; height: 5px; margin: 10px 0; overflow: hidden; background: rgba(151, 71, 23, .13); border-radius: 99px; }
+.progress-track i { height: 100%; display: block; background: linear-gradient(90deg, #f5a20b, #ffd84d); border-radius: inherit; transition: width .45s; }
+.round-card.active .progress-track { background: rgba(255, 255, 255, .2); }
+.round-card.done .progress-track i { background: #38a779; }
+.round-status { color: #bd865e; font-size: 9px; font-weight: 800; letter-spacing: .12em; }
+.round-card.active .round-status { color: #fff3bc; }
+.round-card.done .round-status { color: var(--green); }
+
+.empty-state {
+  min-height: 175px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ad6339;
+  border: 2px dashed #efbd58;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #fff8df, #ffefbd);
+}
+.empty-state span { color: var(--red); font: 800 42px "Songti SC", serif; text-shadow: 0 3px #ffc83b; }
+.empty-state p { margin: 10px 0 5px; color: var(--red); font-weight: 800; letter-spacing: .1em; }
+.empty-state small { opacity: .7; }
+.winner-groups { display: grid; gap: 9px; }
+.winner-row {
+  min-height: 78px;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #f2d79a;
+  border-radius: 16px;
+  background: #fff6df;
+}
+.winner-round { width: 82px; flex: 0 0 auto; border-right: 2px solid #efce81; }
+.winner-round span { display: block; color: #cc8115; font-size: 7px; font-weight: 800; letter-spacing: .22em; }
+.winner-round strong { display: block; color: var(--red); font: 800 29px Georgia, serif; }
+.winner-numbers { padding-left: 25px; display: flex; flex-wrap: wrap; gap: 10px; }
+.winner-numbers span {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  color: var(--red);
+  border: 2px solid #efb83e;
+  border-radius: 50%;
+  background: #fffdf5;
+  box-shadow: 0 3px 0 #e6a92d;
+  font: 800 17px Georgia, serif;
+  animation: reveal .45s cubic-bezier(.2, .8, .2, 1.2) both;
+}
+.winner-numbers .latest {
+  color: #fff8d8;
+  border-color: #ffda55;
+  background: var(--red);
+  box-shadow: 0 4px 0 #9c0a11, 0 8px 18px rgba(200, 16, 25, .23);
+}
+
+footer {
+  height: 110px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  position: relative;
+  z-index: 2;
+  color: #a04f31;
+  border-top: 2px solid rgba(213, 121, 24, .18);
+  background: rgba(255, 246, 215, .46);
+  font: 700 13px "Songti SC", STSong, serif;
+  letter-spacing: .16em;
+}
+footer span { color: var(--red); }
+
+@keyframes lantern-sway { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+@keyframes lucky-roll { from { transform: rotate(-1.5deg) scale(.99); } to { transform: rotate(1.5deg) scale(1.02); } }
+@keyframes bulbs { 50% { filter: brightness(1.35); opacity: .65; } }
+@keyframes celebration-pop { from { opacity: 0; transform: scale(.6); } 70% { opacity: 1; transform: scale(1.06); } to { transform: scale(1); } }
+@keyframes confetti-float { from { translate: 0 -6px; rotate: -8deg; } to { translate: 10px 12px; rotate: 18deg; } }
+@keyframes reveal { from { opacity: 0; transform: scale(.45) rotate(-18deg); } }
+
+@media (max-width: 960px) {
+  .round-grid { grid-template-columns: repeat(2, 1fr); }
+  .rounds-panel, .winners-panel { margin-left: 18px; margin-right: 18px; }
+  .event-title { display: none; }
+  .lantern { opacity: .55; transform: scale(.82); }
+  .lantern-left { left: 18px; }
+  .lantern-right { right: 18px; }
+  .confetti { opacity: .55; }
+}
+
+@media (max-width: 600px) {
+  .app-shell { background: linear-gradient(180deg, #ed2c32 0, #df1822 720px, #f8dfa3 720px, #fff1c9 100%); }
+  .topbar { height: 74px; padding: 0 15px; }
+  .brand-mark { width: 39px; height: 39px; font-size: 19px; }
+  .brand-copy strong { font-size: 14px; }
+  .reset-button { padding: 9px 11px; font-size: 11px; }
+  .hero { min-height: 646px; padding-top: 36px; }
+  .hero h1 { gap: 8px; flex-direction: column; align-items: center; }
+  .hero h1 span { font-size: 42px; }
+  .hero h1 b { font-size: 34px; }
+  .hero-copy { max-width: 330px; line-height: 1.75; }
+  .lantern { display: none; }
+  .confetti { opacity: .25; }
+  .number-stage { height: 290px; margin-top: 23px; border-width: 5px; border-radius: 26px; }
+  .number-medallion { width: 204px; height: 204px; }
+  .number-medallion strong { font-size: 91px; }
+  .number-stage::before, .number-stage::after { display: none; }
+  .cloud { font-size: 67px; }
+  .celebration span:nth-child(1) { left: 37px; }
+  .celebration span:nth-child(2) { left: 28px; }
+  .celebration span:nth-child(3) { right: 38px; }
+  .celebration span:nth-child(4) { right: 28px; }
+  .draw-button { min-width: 280px; height: 64px; font-size: 15px; }
+  .rounds-panel, .winners-panel { padding: 36px 15px 22px; border-radius: 20px; }
+  .panel-ribbon { left: 18px; }
+  .section-heading { align-items: flex-start; gap: 12px; }
+  .section-heading h2 { font-size: 23px; }
+  .section-heading p { max-width: 120px; text-align: right; line-height: 1.5; }
+  .round-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+  .round-card { min-height: 134px; padding: 14px; }
+  .winner-row { padding: 9px 10px; }
+  .winner-round { width: 59px; }
+  .winner-numbers { padding-left: 13px; gap: 7px; }
+  .winner-numbers span { width: 39px; height: 39px; font-size: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
