@@ -39,6 +39,7 @@ test("server-renders the festive lucky draw experience", async () => {
     [...html.matchAll(/aria-label="第\d+轮，已抽取0名，共\d+名"/g)].length,
     10,
   );
+  assert.doesNotMatch(html, /短信|验证码|手机号|sign[ -]?in|log[ -]?in/i);
   assert.doesNotMatch(html, /codex-preview|Building your site|react-loading-skeleton/i);
 });
 
@@ -66,6 +67,8 @@ test("keeps all ten rounds unique and the festive assets production-ready", asyn
   assert.match(layout, /generateMetadata/);
   assert.match(layout, /\/og\.png/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
+  assert.doesNotMatch(packageJson, /drizzle/);
 
   await assert.rejects(access(new URL("../app/_sites-preview/SkeletonPreview.tsx", import.meta.url)));
+  await assert.rejects(access(new URL("../app/chatgpt-auth.ts", import.meta.url)));
 });
