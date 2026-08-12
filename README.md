@@ -50,25 +50,6 @@ npm run dev
 
 终端显示本地访问地址后，在浏览器中打开该地址即可使用。
 
-## 常用命令
-
-```bash
-# 启动本地开发环境
-npm run dev
-
-# 生成生产版本
-npm run build
-
-# 启动已构建的生产版本
-npm run start
-
-# 执行代码检查
-npm run lint
-
-# 构建并运行自动测试
-npm test
-```
-
 ## 修改号码和轮次
 
 轮次人数配置位于 `app/page.tsx`：
